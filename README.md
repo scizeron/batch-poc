@@ -34,13 +34,14 @@ java -jar target/batch-scheduler.jar
 ```sh
 java -jar target/batch-processor.jar 
 ```
+
 ## Swarm Cluster
 
 ###  Docker Image Deployment
 
 ```sh
 mvn clean package docker:build -DpushImage
-``
+```
 
 ### Assumptions
 
@@ -88,11 +89,15 @@ docker service create --name scheduler --replicas 1 \
 
 ### List the scheduled jobs
 
+```sh
 curl http://<swarm_node_host>/v1/jobs returns an empty array at the begining.
+```
 
 ### Add a new job
 
+```sh
 curl -X POST -d '{"jobName":"test", "clientId": "clientId", "description": "desc", "cronExpression": "0 * 14 * * ?"}' http://<swarm_node_host>/v1/jobs
+```
 
 ### Troubleshooting
 
@@ -100,4 +105,9 @@ curl -X POST -d '{"jobName":"test", "clientId": "clientId", "description": "desc
 * Connect to the host, "docker ps" allows you to get the container id
 * To display the application logs : docker logs -f <container_id>
 
- 
+### Scaling
+
+```sh
+docker service scale processor=2
+```
+
