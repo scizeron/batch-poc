@@ -1,0 +1,13 @@
+server:
+  port: 7000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${db.batch.host:localhost}:${db.batch.port:5432}/batch
+    username: ${db.batch.username:batch}
+    password: ${db.batch.password:batch}    
+
+logging:
+ level:
+  com.example: DEBUG
+  org.apache.http: DEBUG
