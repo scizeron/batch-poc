@@ -1,4 +1,4 @@
-# batch
+# batch-poc
 
 ## Purpose
 
@@ -17,7 +17,7 @@ Leverage docker swarm 1.12 +
 
 ```sh
 maven clean install
-``
+```
 
 ## Scheduler
 
