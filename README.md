@@ -35,6 +35,14 @@ java -jar target/batch-scheduler.jar
 java -jar target/batch-processor.jar 
 ```
 
+## Admin
+
+Based on spring-data-rest-webmvc in order to pusblish a read only API about spring-batch jobs executions
+
+```sh
+java -jar target/batch-admin.jar 
+```
+
 ## Swarm Cluster
 
 ###  Docker Image Deployment
@@ -69,7 +77,8 @@ CREATE DATABASE batch OWNER batch;
 Set the replicas equals to 1, in order to troubleshoot.
 
 ```sh
-docker service create --name processor --replicas 1 --network mynet scizeron/batch-processor:0.0.1-SNAPSHOT --db.batch.host=<db_host>
+docker service create --name processor --replicas 1 \
+--network my-network scizeron/batch-processor:0.0.1-SNAPSHOT --db.batch.host=<db_host>
 ```
 
 By default, the db connection info are listed below. Use --var in the command line to override :
@@ -80,7 +89,7 @@ By default, the db connection info are listed below. Use --var in the command li
 
 ```sh
 docker service create --name scheduler --replicas 1 \
---network mynet --endpoint-mode vip \
+--network my-network --endpoint-mode vip \
 --publish 80:7000 scizeron/batch-scheduler:0.0.1-SNAPSHOT \
 --batch.processing.service=processor:7001 --db.batch.host=<db_host>
 ```
@@ -111,3 +120,15 @@ curl -X POST -d '{"jobName":"test", "clientId": "clientId", "description": "desc
 docker service scale processor=2
 ```
 
+### Jobs executions
+
+```sh
+docker service create --name admin --replicas 1 \
+--network my-network --endpoint-mode vip \
+--publish 82:7002 scizeron/batch-admin:0.0.1-SNAPSHOT \
+--db.batch.host=<db_host>
+```
+
+```sh
+curl http://<swarm_node_host>/api/batchJobExecutions
+```

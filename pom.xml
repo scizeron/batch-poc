@@ -132,7 +132,7 @@
 	<modules>
 		<module>batch-scheduler</module>
 		<module>batch-processor</module>
-		<module>batch-api</module>
+		<module>batch-admin</module>
 	</modules>
 
 </project>
