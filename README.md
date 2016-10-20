@@ -54,7 +54,7 @@ mvn clean package docker:build -DpushImage
 ### Assumptions
 
 * A cluster swarm is up and running
-* An existing overlay network "mynet" or other ...
+* An existing overlay network "my-network" or other ...
 * A PostgreSQL server instance
 
 ```sh
