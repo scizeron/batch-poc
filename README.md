@@ -68,7 +68,7 @@ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432
 ```
 
 ```sh
-CREATE USER batch WITH PASSWORD batch;
+CREATE USER batch WITH PASSWORD 'batch';
 CREATE DATABASE batch OWNER batch;
 ```
 
